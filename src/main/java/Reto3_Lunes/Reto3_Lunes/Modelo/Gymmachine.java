@@ -26,7 +26,7 @@ public class Gymmachine implements Serializable{
     private String description;
     
     @ManyToOne
-    @JoinColumn(name ="id")
+    @JoinColumn(name ="categoryId")
     @JsonIgnoreProperties("machines")
     private Categoria category;
     
