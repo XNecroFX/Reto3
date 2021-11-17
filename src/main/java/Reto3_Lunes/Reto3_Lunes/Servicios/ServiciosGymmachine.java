@@ -20,11 +20,11 @@ public class ServiciosGymmachine implements Serializable{
         return metodosCrud.getGymmachine(idGymmachine);
     }
     public Gymmachine save(Gymmachine machine){
-        if(machine.getIdMachine()==null){
+        if(machine.getId()==null){
             return metodosCrud.save(machine);
         
         }else{
-            Optional<Gymmachine> evt=metodosCrud.getGymmachine(machine.getIdMachine());
+            Optional<Gymmachine> evt=metodosCrud.getGymmachine(machine.getId());
             if(evt.isEmpty()){
                 return metodosCrud.save(machine);            
             }else{

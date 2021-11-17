@@ -1,4 +1,4 @@
-package Reto3_Lunes.Reto3_Lunes.Modelo;
+ package Reto3_Lunes.Reto3_Lunes.Modelo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

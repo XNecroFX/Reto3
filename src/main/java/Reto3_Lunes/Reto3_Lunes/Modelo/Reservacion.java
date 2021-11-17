@@ -3,19 +3,21 @@ package Reto3_Lunes.Reto3_Lunes.Modelo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "reservation")
 public class Reservacion implements Serializable{
     @Id
-    @GeneratedValue (strategy =GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer idReservation;
     private Date starDate;
     private Date devolutionDate;
@@ -24,15 +26,17 @@ public class Reservacion implements Serializable{
     
     @ManyToOne
     @JoinColumn(name ="id")
-    @JsonIgnoreProperties("reservation")
+    @JsonIgnoreProperties("reservations")
     private Gymmachine machine;
     
     @ManyToOne
-    @JoinColumn(name ="idCliente")
-    @JsonIgnoreProperties({"reservation","message"})
+    @JoinColumn(name ="idClient")
+    @JsonIgnoreProperties({"reservations","messages"})
     private Cliente client;
 
-    //private Integer Score;
+    @OneToOne(cascade = {CascadeType.REMOVE},mappedBy="reservation")
+    @JsonIgnoreProperties("reservation")
+    private Score score;
 
     public Integer getIdReservation() {
         return idReservation;
@@ -82,5 +86,13 @@ public class Reservacion implements Serializable{
         this.client = client;
     }
 
-       
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
+
+    
 }

@@ -19,7 +19,7 @@ public class Gymmachine implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private Integer idMachine;
+    private Integer id;
     private String brand;
     private Integer year;
     private String name;
@@ -27,8 +27,9 @@ public class Gymmachine implements Serializable{
     
     @ManyToOne
     @JoinColumn(name ="id")
-    @JsonIgnoreProperties("category")
+    @JsonIgnoreProperties("machines")
     private Categoria category;
+    
     
     @OneToMany (cascade = {CascadeType.PERSIST},mappedBy="machine")
     @JsonIgnoreProperties({"machine", "client"})
@@ -38,8 +39,8 @@ public class Gymmachine implements Serializable{
     @JsonIgnoreProperties({"machine", "message"})
     private List<Reservacion> reservation;
 
-    public Integer getIdMachine() {
-        return idMachine;
+    public Integer getId() {
+        return id;
     }
 
     public String getBrand() {
