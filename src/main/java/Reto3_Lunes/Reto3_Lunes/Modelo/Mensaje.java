@@ -19,7 +19,7 @@ public class Mensaje implements Serializable{
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer idMessage;
-    private String mesaggeText;
+    private String messageText;
 
     @ManyToOne
     @JoinColumn(name ="machineId")
@@ -39,12 +39,12 @@ public class Mensaje implements Serializable{
         this.idMessage = idMessage;
     }
 
-    public String getMesaggeText() {
-        return mesaggeText;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public void setMesaggeText(String mesaggeText) {
-        this.mesaggeText = mesaggeText;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
     public Gymmachine getMachine() {
@@ -63,5 +63,5 @@ public class Mensaje implements Serializable{
         this.client = client;
     }
 
-        
+    
 }
