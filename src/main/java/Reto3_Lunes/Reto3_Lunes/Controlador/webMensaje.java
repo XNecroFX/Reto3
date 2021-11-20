@@ -43,13 +43,13 @@ public class webMensaje implements Serializable{
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Mensaje update(@RequestBody Mensaje message) {
-        return Mensaje.update(message);
+        return servicios.update(message);
     }
 
     @DeleteMapping("/{idMesage}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("idMessage") int messageId) {
-        return Mensaje.deleteMessage(messageId);
+        return servicios.deleteMessage(messageId);
     }
 
 }
