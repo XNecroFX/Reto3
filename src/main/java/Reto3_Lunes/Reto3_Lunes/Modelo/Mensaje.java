@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "message")
 public class Mensaje implements Serializable{
+
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer idMessage;

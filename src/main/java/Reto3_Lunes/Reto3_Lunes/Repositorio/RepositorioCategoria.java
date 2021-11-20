@@ -19,9 +19,11 @@ public class RepositorioCategoria implements Serializable{
     public Optional <Categoria> getCategoria(int id){
         return crud.findById(id);
     }
-    public Categoria save(Categoria categoria){
-        return crud.save(categoria);
+    public Categoria save(Categoria c){
+        return crud.save(c);
     }
-    
+    public void delete(Categoria c){
+       crud.delete(c); 
+    }
     
 }

@@ -21,11 +21,10 @@ public class RepositorioCliente implements Serializable{
     public Optional <Cliente> getCliente (int id){
         return crud.findById(id);
     }
-    public Cliente save(Cliente cliente){
-        return crud.save(cliente);
+    public Cliente save(Cliente l){
+        return crud.save(l);
     }
-
-    public Optional<Cliente> getClient(Integer idClient) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Cliente l){
+        crud.delete(l);
     }
 }

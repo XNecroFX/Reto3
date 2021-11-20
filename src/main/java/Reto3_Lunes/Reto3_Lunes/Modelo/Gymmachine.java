@@ -16,7 +16,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "machine")
 public class Gymmachine implements Serializable{
-    @Id
+
+   @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private Integer id;

@@ -21,17 +21,47 @@ public class ServiciosCliente implements Serializable{
     public Optional<Cliente> getCliente(int idCliente){
         return metodosCrud.getCliente(idCliente);
     }
-    public Cliente save(Cliente cliente){
-        if(cliente.getIdClient()==null){
-            return metodosCrud.save(cliente);
+    public Cliente save(Cliente l){
+        if(l.getIdClient()==null){
+            return metodosCrud.save(l);
         
         }else{
-            Optional<Cliente> evt=metodosCrud.getClient(cliente.getIdClient());
+            Optional<Cliente> evt=metodosCrud.getCliente(l.getIdClient());
             if(evt.isEmpty()){
-                return metodosCrud.save(cliente);            
+                return metodosCrud.save(l);            
             }else{
-                return cliente;
+                return l;
             }
         }
+    }
+    public Cliente update(Cliente l){
+        if(l.getIdClient()!=null){
+            Optional<Cliente> e= metodosCrud.getCliente(l.getIdClient());
+            if(!e.isEmpty()){
+                if(l.getName()!=null){
+                    e.get().setName(l.getName());
+                }
+                if(l.getAge()!=0){
+                    e.get().setAge(l.getAge());
+                }
+                if(l.getPassword()!=null){
+                    e.get().setPassword(l.getPassword());
+                }
+                metodosCrud.save(e.get());
+                return e.get();
+            }else{
+                return l;
+            }
+        }else{
+            return l;
+        }
+    }
+
+    public boolean delete(int clientId) {
+        Boolean aBoolean = getCliente(clientId).map(client -> {
+            metodosCrud.delete(client);
+            return true;
+        }).orElse(false);
+        return aBoolean;
     }
 }

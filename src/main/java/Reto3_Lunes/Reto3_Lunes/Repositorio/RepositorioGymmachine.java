@@ -20,7 +20,10 @@ public class RepositorioGymmachine implements Serializable{
     public Optional <Gymmachine> getGymmachine (int id){
             return crud.findById(id);
     }
-    public Gymmachine save(Gymmachine gymmachine){
-        return crud.save(gymmachine);
+    public Gymmachine save(Gymmachine m){
+        return crud.save(m);
+    }
+    public void delete(Gymmachine m){
+        crud.delete(m);
     }
 }

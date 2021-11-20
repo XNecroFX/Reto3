@@ -20,7 +20,10 @@ public class RepositorioReservacion implements Serializable{
     public Optional <Reservacion> getReservacion(int id){
         return crud.findById(id);
     }
-    public Reservacion save(Reservacion reservacion){
-        return crud.save(reservacion);
+    public Reservacion save(Reservacion r){
+        return crud.save(r);
+    }
+    public void delete(Reservacion r){
+        crud.delete(r);
     }
 }

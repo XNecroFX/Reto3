@@ -19,7 +19,10 @@ public class RepositorioMensaje implements Serializable{
     public Optional <Mensaje> getMensaje(int id){
         return crud.findById(id);
     }
-    public Mensaje save(Mensaje mensaje){
-        return crud.save(mensaje);
+    public Mensaje save(Mensaje e){
+        return crud.save(e);
     } 
+    public void delete(Mensaje e){
+        crud.delete(e);
+    }
 }

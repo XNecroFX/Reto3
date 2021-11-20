@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServiciosCategoria implements Serializable{
+
     @Autowired
     private RepositorioCategoria metodosCrud;
     
@@ -21,19 +22,43 @@ public class ServiciosCategoria implements Serializable{
         return metodosCrud.getCategoria(idCategoria);
     }
     
-    public Categoria save(Categoria categoria){
-        if(categoria.getId()==null){
-            return metodosCrud.save(categoria);
+    public Categoria save(Categoria c){
+        if(c.getId()==null){
+            return metodosCrud.save(c);
         
         }else{
-            Optional<Categoria> evt=metodosCrud.getCategoria(categoria.getId());
+            Optional<Categoria> evt=metodosCrud.getCategoria(c.getId());
             if(evt.isEmpty()){
-                return metodosCrud.save(categoria);            
+                return metodosCrud.save(c);            
             
             }else{
-                return categoria;
+                return c;
             }
         
         }
+    }
+     public Categoria update(Categoria c){
+        if(c.getId()!=null){
+            Optional<Categoria>g=metodosCrud.getCategoria(c.getId());
+            if(!g.isEmpty()){
+                if(c.getDescription()!=null){
+                    g.get().setDescription(c.getDescription());
+                }
+                if(c.getName()!=null){
+                    g.get().setName(c.getName());
+                }
+                return metodosCrud.save(g.get());
+            }
+        }
+        return c;
+    }
+     
+     public boolean delete(int id){
+        Boolean d;
+        d = getCategoria(id).map(categoria -> {
+            metodosCrud.delete(categoria);
+            return true;
+        }).orElse(false);
+        return d;
     }
 }

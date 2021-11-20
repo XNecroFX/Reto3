@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServiciosReservacion implements Serializable{
+
     @Autowired
     private RepositorioReservacion metodosCrud;
     
@@ -22,19 +23,49 @@ public class ServiciosReservacion implements Serializable{
         return metodosCrud.getReservacion(idReservacion);
     }
     
-    public Reservacion save(Reservacion reservacion){
-        if(reservacion.getIdReservation()==null){
-            return metodosCrud.save(reservacion);
+    public Reservacion save(Reservacion r){
+        if(r.getIdReservation()==null){
+            return metodosCrud.save(r);
         
         }else{
-            Optional<Reservacion> evt=metodosCrud.getReservacion(reservacion.getIdReservation());
+            Optional<Reservacion> evt=metodosCrud.getReservacion(r.getIdReservation());
             if(evt.isEmpty()){
-                return metodosCrud.save(reservacion);            
+                return metodosCrud.save(r);            
             
             }else{
-                return reservacion;
+                return r;
             }
-        
         }
+    }
+    public Reservacion update(Reservacion reservation) {
+        if (reservation.getIdReservation() != null) {
+            Optional<Reservacion> e = metodosCrud.getReservacion((int) reservation.getIdReservation());
+            if (!e.isEmpty()) {
+
+                if (reservation.getStartDate() != null) {
+                    e.get().setStartDate(reservation.getStartDate());
+                }
+                if (reservation.getDevolutionDate() != null) {
+                    e.get().setDevolutionDate(reservation.getDevolutionDate());
+                }
+                if (reservation.getStatus() != null) {
+                    e.get().setStatus(reservation.getStatus());
+                }
+                metodosCrud.save(e.get());
+                return e.get();
+            } else {
+                return reservation;
+            }
+        } else {
+            return reservation;
+        }
+    }
+
+    public boolean deleteReservation(int reservationId) {
+        Boolean aBoolean = getReservacion(reservationId).map(reservation -> {
+            metodosCrud.delete(reservation);
+            return true;
+        }).orElse(false);
+        return aBoolean;
     }
 }

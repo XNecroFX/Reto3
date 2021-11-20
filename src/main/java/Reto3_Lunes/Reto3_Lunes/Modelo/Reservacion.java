@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "reservation")
 public class Reservacion implements Serializable{
+
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer idReservation;
